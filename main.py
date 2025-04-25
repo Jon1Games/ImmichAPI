@@ -10,7 +10,7 @@ class ImmichAPI:
     def requests(self, type:str, url: str, responseType: str = "json", payload: json = {}):
         headers = {'x-api-key': self.apiKey}
         
-        if payload:
+        if payload or type == "POST":
             headers['Content-Type'] = 'application/json'
 
         if responseType == "json":
@@ -50,3 +50,12 @@ class ImmichAPI:
             "tagIds": tagIds
         })
         return(self.requests(type="PUT", url="/api/tags/assets", payload=payload))
+    
+    def createTag(self, name: str, color: str = "", parent: str = ""):
+        data = json.dumps({
+            "color": color,
+            "name": name
+        })
+        if parent != "":
+            data["parentId"] = parent
+        return(self.requests(type="POST", url="/api/tags", payload=data))
