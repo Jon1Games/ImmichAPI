@@ -9,3 +9,9 @@ Then import the ImmichAPI class.
 ```python
 from ImmichAPI.main import ImmichAPI
 ```
+
+## Requirements
+if you have yout own requirements.txt you can add this:
+```
+-r immichAPI/requirements.txt
+```
