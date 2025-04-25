@@ -50,5 +50,3 @@ class ImmichAPI:
             "tagIds": tagIds
         })
         return(self.requests(type="PUT", url="/api/tags/assets", payload=payload))
-
-# immich = ImmichAPI(serverUrl="http://shuna:2283", apiKey="eyjorY8Z3DYhViEJcutTXLXmUGc0afB9IbG0nf0")
