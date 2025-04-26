@@ -1,6 +1,7 @@
 import requests as requestsrequests
 import json
 import io
+import random
 
 class ImmichAPI:
     def __init__(self, serverUrl: str, apiKey: str):
@@ -39,10 +40,21 @@ class ImmichAPI:
         return(self.requests(type="GET", url="/api/albums/" + id))
 
     def downloadAsset(self, id: int):
-        self.requests(type="GET", url="/api/assets/"+id+"/original", responseType="binary")
+        return(self.requests(type="GET", url="/api/assets/"+id+"/original", responseType="binary"))
+    
+    def downloadRandomAssetFromAlbumByName(self, name: str):
+        assets = self.getAlbumInfo(self.getAlbumByName(name=name)["id"])["assets"]
+        random_asset_id = random.choice(assets)["id"]
+        return self.downloadAsset(id=random_asset_id)
 
     def getAllTags(self):
-        self.requests(type="GET", url="/api/tags")
+        return(self.requests(type="GET", url="/api/tags"))
+    
+    def getTagByName(self, name:str):
+        tags = self.getAllTags()
+        for tag in tags:
+            if tag["name"] == name:
+                return tag
 
     def bulkTagAssets(self, assesIds: tuple[str], tagIds: tuple[str]):
         payload = json.dumps({
