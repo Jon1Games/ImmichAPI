@@ -42,10 +42,13 @@ class ImmichAPI:
     def downloadAsset(self, id: int):
         return(self.requests(type="GET", url="/api/assets/"+id+"/original", responseType="binary"))
     
-    def downloadRandomAssetFromAlbumByName(self, name: str):
+    def downloadRandomAssetFromAlbumByName(self, name: str, count: int = 1):
         assets = self.getAlbumInfo(self.getAlbumByName(name=name)["id"])["assets"]
-        random_asset_id = random.choice(assets)["id"]
-        return self.downloadAsset(id=random_asset_id)
+        downloaded_assets = []
+        for _ in range(count):
+            random_asset_id = random.choice(assets)["id"]
+            downloaded_assets.append(self.downloadAsset(id=random_asset_id))
+        return downloaded_assets
 
     def getAllTags(self):
         return(self.requests(type="GET", url="/api/tags"))
