@@ -51,8 +51,8 @@ class ImmichAPI:
     
     def moveToOtherAlbum(self, sourceAlbumId: int, destinationAlbumId: int, assetIds: tuple[int]):
         result = {}
-        result["remove"] = self.removeAssetsToAlbum(albumId=source_album["id"], assetIds=assetIds)
-        result["add"] = self.addAssetsToAlbum(albumId=destination_album["id"], assetIds=assetIds)
+        result["remove"] = self.removeAssetsToAlbum(albumId=sourceAlbumId, assetIds=assetIds)
+        result["add"] = self.addAssetsToAlbum(albumId=destinationAlbumId, assetIds=assetIds)
         return result
 
     def downloadAsset(self, id: int):
