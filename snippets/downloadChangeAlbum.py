@@ -8,10 +8,10 @@ load_dotenv()
 # CONFIG
 serverURL = os.getenv("IMMICH_SERVER_URL")
 apiKey = os.getenv("IMMICH_API_KEY")
-image_count = int(os.getenv("IMAGE_COUNT"))
-source_album_name = os.getenv("SOURCE_ALBUM_NAME")
-destination_album_name = os.getenv("DESTINATION_ALBUM_NAME")
-destination_folder = os.getenv("DESTINATION_FOLDER")
+image_count = int(os.getenv("DCA-IMAGE_COUNT"))
+source_album_name = os.getenv("DCA-SOURCE_ALBUM_NAME")
+destination_album_name = os.getenv("DCA-DESTINATION_ALBUM_NAME")
+destination_folder = os.getenv("DCA-DESTINATION_FOLDER")
 
 def run(
         serverURL: str,
