@@ -38,6 +38,22 @@ class ImmichAPI:
 
     def getAlbumInfo(self, id: int):
         return(self.requests(type="GET", url="/api/albums/" + id))
+    
+    def addAssetsToAlbum(self, albumId:int, assetIds: tuple[int]):
+        return(self.requests(type="PUT", url="/api/albums/" + str(albumId) + "/assets", payload=json.dumps({
+            "ids": assetIds
+        })))
+    
+    def removeAssetsToAlbum(self, albumId:int, assetIds: tuple[int]):
+        return(self.requests(type="DELETE", url="/api/albums/" + str(albumId) + "/assets", payload=json.dumps({
+            "ids": assetIds
+        })))
+    
+    def moveToOtherAlbum(self, sourceAlbumId: int, destinationAlbumId: int, assetIds: tuple[int]):
+        result = {}
+        result["remove"] = immich.removeAssetsToAlbum(albumId=source_album["id"], assetIds=assetIds)
+        result["add"] = immich.addAssetsToAlbum(albumId=destination_album["id"], assetIds=assetIds)
+        return result
 
     def downloadAsset(self, id: int):
         return(self.requests(type="GET", url="/api/assets/"+id+"/original", responseType="binary"))
