@@ -23,6 +23,7 @@ if you have yout own requirements.txt you can add this:
 ```python
 serverURL = ""
 apiKey = ""
+image_count = 1
 source_album_name = ""
 destination_album_name = ""
 
@@ -30,7 +31,7 @@ immich = ImmichAPI(serverURL, apiKey)
 
 source_album = immich.getAlbumByName(source_album_name)
 destination_album = immich.getAlbumByName(destination_album_name)
-assets = immich.downloadRandomAssetFromAlbum(source_album["id"], count=3)
+assets = immich.downloadRandomAssetFromAlbum(source_album["id"], count=image_count)
 
 count = 0
 for asset in assets:
