@@ -15,3 +15,28 @@ if you have yout own requirements.txt you can add this:
 ```
 -r immichAPI/requirements.txt
 ```
+
+## Snippets
+
+### download random image(s) from album and move those to other album
+
+```python
+serverURL = ""
+apiKey = ""
+source_album_name = ""
+destination_album_name = ""
+
+immich = ImmichAPI(serverURL, apiKey)
+
+source_album = immich.getAlbumByName(source_album_name)
+destination_album = immich.getAlbumByName(destination_album_name)
+assets = immich.downloadRandomAssetFromAlbum(source_album["id"], count=3)
+
+count = 0
+for asset in assets:
+    count = count + 1
+    with open("asset-" + str(count) + ".png", "wb") as file:
+        file.write(asset["data"].read())
+
+immich.moveToOtherAlbum(sourceAlbumId=source_album["id"], destinationAlbumId=destination_album["id"], assetIds=[asset["id"] for asset in assets])
+```
